@@ -1,0 +1,29 @@
+4.2.4 每次读取一行字符串输入
+
+cin面向单词读取，每次只能读取一个单词 以空格，换行，制表符结束
+
+面向行输入1：cin.getline(输入行数组名称, 读取的字符数包括换行符)
+    通过回车换行符确认结尾不保存换行符将换行符替换为空字符
+
+面向行输入2：cin.get(name, ArSize) 不读取换行符保留到输入队列中
+            cin.get() 读取一个字符(通常为换行符)
+            cin.get(name,ArSize).get() 读取存入字符串并开启下一行
+
+当get()读取空行后设置失效位(failbit)接下来的输入将被阻断，需要 cin.clear(); 来回复输入
+
+如果输入的字符串比分配人的空间长，则getline()和get()把余下的字符保留在输入队列中，
+    getline()还会设置失效位，关闭后面输入
+
+4.3 string类简介
+
+确定string对象字符数: int len = str1.size();
+未被初始化的string对象长度被自动设置为0
+输入储存string: getline(cin, str);
+
+原始字符串：用前缀R标识字符串将 "( 和 )" 用作定界符
+    eg: cout << R"(Jim "King" Tutt uses "\n" instead of endl.)" << "\n";
+    输出结果为: Jin "King" Tutt uses "\n" instead of endl.
+    如用标准字符串字面值需要如下代码: cout << "Jim \"King\" Tutt uses \" \\n\" instead of endl." << "\n";
+    如果想在原始字符串中包含 "( 和 )" 可在开头结尾处的引号括号之间加上基本字符(空格，左括号，右括号，斜杠，控制字符除外)
+    eg: cout << R"+*("(Who wouldn't?)",she whispered.)+*" << "\n";
+    显示结果为: "(Who wouldn't?)",she whispered.
